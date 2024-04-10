@@ -1,4 +1,4 @@
-import type { Post } from '@/types/post.type';
+import { Post } from '@prisma/client';
 import Image from 'next/image';
 import dayjs from 'dayjs';
 import * as dateHelper from '@/lib/helpers/date.helper';
@@ -27,7 +27,7 @@ function PostItem({ post }: Props) {
           <h2 className="card-title items-start">{post.title}</h2>
           <p className="mb-5">{post.title}</p>
           <div className="card-actions justify-end">
-            <div className="badge badge-outline p-3">{dayjs(post.createdAt).format('DD MMMM YYYY')}</div>
+            <div className="badge badge-outline p-3">{dateHelper.fromNow(post.createdAt)}</div>
             {isWithinAWeek && <div className="badge badge-secondary p-3">New</div>}
           </div>
         </div>

@@ -1,4 +1,4 @@
-import type { Post } from '@/types/post.type';
+import { Post } from '@prisma/client';
 import PostItem from './post-item';
 
 type Props = {

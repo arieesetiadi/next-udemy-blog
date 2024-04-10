@@ -1,15 +1,27 @@
 import FeaturedPosts from '@/components/home/featured-posts';
 import Hero from '@/components/home/hero';
 
-import posts from '@/../data/posts.json';
+import { getFeaturedPosts } from '@/lib/api/posts.api';
+import { Post } from '@prisma/client';
 
-function HomePage() {
+type Props = {
+  featuredPosts: Post[];
+};
+
+export async function getStaticProps() {
+  const results = await getFeaturedPosts();
+  const featuredPosts = results.map((post) => {
+    return { ...post, createdAt: post.createdAt.getTime() };
+  });
+
+  return { props: { featuredPosts } };
+}
+
+export default function HomePage({ featuredPosts }: Props) {
   return (
     <>
       <Hero />
-      <FeaturedPosts posts={posts} />
+      <FeaturedPosts posts={featuredPosts} />
     </>
   );
 }
-
-export default HomePage;
