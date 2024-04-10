@@ -1,6 +1,9 @@
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 function Navbar() {
+  const path = usePathname();
+
   return (
     <div className="bg-base-100">
       <div className="navbar mx-auto max-w-5xl py-2">
@@ -20,10 +23,14 @@ function Navbar() {
               tabIndex={0}
               className="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow">
               <li>
-                <Link href="/">Home</Link>
+                <Link href="/" className={path == '/' ? 'active' : ''}>
+                  Home
+                </Link>
               </li>
               <li>
-                <Link href="/posts">Posts</Link>
+                <Link href="/posts" className={path == '/posts' ? 'active' : ''}>
+                  Posts
+                </Link>
               </li>
             </ul>
           </div>
@@ -32,12 +39,16 @@ function Navbar() {
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 gap-5">
+          <ul className="menu menu-horizontal gap-5 px-1">
             <li>
-              <Link href="/">Home</Link>
+              <Link href="/" className={path == '/' ? 'active' : ''}>
+                Home
+              </Link>
             </li>
             <li>
-              <Link href="/posts">Posts</Link>
+              <Link href="/posts" className={path == '/posts' ? 'active' : ''}>
+                Posts
+              </Link>
             </li>
           </ul>
         </div>

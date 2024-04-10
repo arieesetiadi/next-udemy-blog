@@ -10,4 +10,10 @@ export async function getFeaturedPosts(): Promise<Post[]> {
   });
 }
 
-export async function getPosts() {}
+export async function getPosts(): Promise<Post[]> {
+  return prisma.post.findMany({
+    orderBy: {
+      createdAt: 'desc',
+    },
+  });
+}
