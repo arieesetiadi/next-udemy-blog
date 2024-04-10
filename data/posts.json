@@ -4,34 +4,34 @@
         "title": "The Benefits of Meditation: A Guide to Inner Peace",
         "image": "meditation.jpg",
         "excerpt": "Discover the profound benefits of incorporating meditation into your daily routine.",
-        "createdAt": "2024-04-01T00:00:00.000Z"
+        "createdAt": "2024-03-01"
     },
     {
         "slug": "exploring-the-wonders-of-the-great-barrier-reef",
         "title": "Exploring the Wonders of the Great Barrier Reef",
         "image": "great-barrier-reef.jpg",
         "excerpt": "Dive into the vibrant marine ecosystem of the Great Barrier Reef and witness its beauty.",
-        "createdAt": "2024-04-03T00:00:00.000Z"
+        "createdAt": "2024-04-03"
     },
     {
         "slug": "mastering-the-art-of-sourdough-a-beginners-guide",
         "title": "Mastering the Art of Sourdough: A Beginner's Guide",
         "image": "sourdough.jpg",
         "excerpt": "Learn the essential techniques and tips for baking delicious sourdough bread at home.",
-        "createdAt": "2024-04-05T00:00:00.000Z"
+        "createdAt": "2024-04-05"
     },
     {
         "slug": "the-power-of-positive-thinking-transform-your-life-today",
         "title": "The Power of Positive Thinking: Transform Your Life Today",
         "image": "positive-thinking.jpg",
         "excerpt": "Explore how adopting a positive mindset can lead to greater happiness and success.",
-        "createdAt": "2024-04-07T00:00:00.000Z"
+        "createdAt": "2024-04-07"
     },
     {
         "slug": "discovering-the-hidden-gems-of-kyoto-a-travelers-journey",
         "title": "Discovering the Hidden Gems of Kyoto: A Traveler's Journey",
         "image": "kyoto.jpg",
         "excerpt": "Embark on a cultural adventure through the historic streets and temples of Kyoto.",
-        "createdAt": "2024-04-09T00:00:00.000Z"
+        "createdAt": "2024-04-09"
     }
 ]
