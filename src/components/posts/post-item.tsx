@@ -1,6 +1,5 @@
 import { Post } from '@prisma/client';
 import Image from 'next/image';
-import dayjs from 'dayjs';
 import * as dateHelper from '@/lib/helpers/date.helper';
 import Link from 'next/link';
 
@@ -16,7 +15,7 @@ function PostItem({ post }: Props) {
       <div className="card h-full bg-base-100 shadow-xl">
         <figure>
           <Image
-            src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+            src={`/images/posts/${post.image}`}
             alt={`Image of ${post.title}`}
             width={500}
             height={200}
@@ -28,7 +27,7 @@ function PostItem({ post }: Props) {
           <p className="mb-5">{post.title}</p>
           <div className="card-actions justify-end">
             <div className="badge badge-outline p-3">{dateHelper.fromNow(post.createdAt)}</div>
-            {isWithinAWeek && <div className="badge badge-secondary p-3">New</div>}
+            {isWithinAWeek && <div className="badge badge-primary p-3">New</div>}
           </div>
         </div>
       </div>
