@@ -2,6 +2,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { ContactMessage } from '@/types/contact.type';
+import { useMutation } from '@tanstack/react-query';
+import * as contactApi from '@/lib/api/contact.api';
 
 const schema = z.object({
   email: z.string().min(1, 'Please insert your email address').email('Please enter a valid email'),
@@ -10,6 +12,13 @@ const schema = z.object({
 });
 
 export default function ContactForm() {
+  const contactMutation = useMutation({
+    mutationKey: ['store-contact-message'],
+    mutationFn: async (contactMessage: ContactMessage) => {
+      return await contactApi.storeContactMessage(contactMessage);
+    },
+  });
+
   const {
     register,
     handleSubmit,
@@ -18,8 +27,8 @@ export default function ContactForm() {
     resolver: zodResolver(schema),
   });
 
-  function submitContactForm(data: any) {
-    console.log({ data });
+  function submitContactForm(contactMessage: any) {
+    contactMutation.mutate(contactMessage);
   }
 
   return (
@@ -38,7 +47,7 @@ export default function ContactForm() {
             </svg>
             <input {...register('email')} type="text" className="grow" placeholder="Your email" />
           </label>
-          {errors.email && <span className='block mt-1 text-red-500'>{errors.email.message}</span>}
+          {errors.email && <span className="mt-1 block text-red-500">{errors.email.message}</span>}
         </div>
 
         {/* Name */}
@@ -53,20 +62,21 @@ export default function ContactForm() {
             </svg>
             <input {...register('name')} type="text" className="grow" placeholder="Your name" />
           </label>
-          {errors.name && <span className='block mt-1 text-red-500'>{errors.name.message}</span>}
+          {errors.name && <span className="mt-1 block text-red-500">{errors.name.message}</span>}
         </div>
       </div>
 
-      <div className="w-full mb-10">
+      <div className="mb-10 w-full">
         <textarea
           {...register('message')}
           className="textarea textarea-bordered w-full"
           placeholder="Your message"
           rows={6}></textarea>
-        {errors.message && <span className='block mt-1 text-red-500'>{errors.message.message}</span>}
+        {errors.message && <span className="mt-1 block text-red-500">{errors.message.message}</span>}
       </div>
 
-      <button type="submit" className="btn btn-primary">
+      <button type="submit" className="btn btn-primary" disabled={contactMutation.isPending}>
+        {contactMutation.isPending && <span className="loading loading-spinner loading-xs"></span>}
         Send Message
       </button>
     </form>
