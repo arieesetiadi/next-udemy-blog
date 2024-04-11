@@ -1,16 +1,26 @@
 import PostList from '@/components/posts/post-list';
-import type { Post } from '@prisma/client';
 import { getPosts } from '@/lib/api/posts.api';
 
+import * as imageHelper from '@/lib/helpers/image.helper';
+import { PostWithBlurHash } from '@/types/post.type';
+
 type Props = {
-  posts: Post[];
+  posts: PostWithBlurHash[];
 };
 
 export async function getStaticProps() {
   const results = await getPosts();
-  const posts = results.map((post) => {
-    return { ...post, createdAt: post.createdAt.getTime() };
+
+  const postsPromises = results.map(async (post) => {
+    const blurHash = await imageHelper.generateBlurHash(`/images/posts/${post.image}`);
+    return {
+      ...post,
+      blurHash,
+      createdAt: post.createdAt.getTime(),
+    };
   });
+
+  const posts = await Promise.all(postsPromises);
 
   return {
     props: { posts },

@@ -1,10 +1,10 @@
-import { Post } from '@prisma/client';
 import Image from 'next/image';
 import * as dateHelper from '@/lib/helpers/date.helper';
 import Link from 'next/link';
+import { PostWithBlurHash } from '@/types/post.type';
 
 type Props = {
-  post: Post;
+  post: PostWithBlurHash;
 };
 
 function PostItem({ post }: Props) {
@@ -20,6 +20,8 @@ function PostItem({ post }: Props) {
             width={500}
             height={200}
             quality={90}
+            placeholder="blur"
+            blurDataURL={post.blurHash}
           />
         </figure>
         <div className="card-body">
