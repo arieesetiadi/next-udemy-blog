@@ -11,10 +11,19 @@ datasource db {
 }
 
 model Post {
+    id         Int      @id @default(autoincrement())
+    slug       String
+    title      String
+    image      String
+    excerpt    String
+    isFeatured Boolean  @default(false)
+    createdAt  DateTime @default(now())
+}
+
+model ContactMessage {
     id        Int      @id @default(autoincrement())
-    slug      String
-    title     String
-    image     String
-    excerpt   String
+    email     String
+    name      String
+    message   String
     createdAt DateTime @default(now())
 }
