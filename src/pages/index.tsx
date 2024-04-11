@@ -14,7 +14,10 @@ export async function getStaticProps() {
     return { ...post, createdAt: post.createdAt.getTime() };
   });
 
-  return { props: { featuredPosts } };
+  return {
+    props: { featuredPosts },
+    revalidate: 60,
+  };
 }
 
 export default function HomePage({ featuredPosts }: Props) {

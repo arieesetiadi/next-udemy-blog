@@ -1,7 +1,5 @@
-export type Post = {
-  slug: string;
-  title: string;
-  image: string;
-  excerpt: string;
-  createdAt: string;
+import { Post } from '@prisma/client';
+
+export type PostWithBlurHash = Post & {
+  blurHash?: string;
 };

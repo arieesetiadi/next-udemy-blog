@@ -12,7 +12,10 @@ export async function getStaticProps() {
     return { ...post, createdAt: post.createdAt.getTime() };
   });
 
-  return { props: { posts } };
+  return {
+    props: { posts },
+    revalidate: 60,
+  };
 }
 
 export default function PostsPage({ posts }: Props) {
