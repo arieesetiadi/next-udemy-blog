@@ -28,7 +28,7 @@ function Navbar() {
                 </Link>
               </li>
               <li>
-                <Link href="/posts" className={path == '/posts' ? 'active' : ''}>
+                <Link href="/posts" className={path.startsWith('/posts') ? 'active' : ''}>
                   Posts
                 </Link>
               </li>
@@ -46,7 +46,7 @@ function Navbar() {
               </Link>
             </li>
             <li>
-              <Link href="/posts" className={path == '/posts' ? 'active' : ''}>
+              <Link href="/posts" className={path.startsWith('/posts') ? 'active' : ''}>
                 Posts
               </Link>
             </li>
