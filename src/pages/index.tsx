@@ -2,17 +2,27 @@ import FeaturedPosts from '@/components/home/featured-posts';
 import Hero from '@/components/home/hero';
 
 import { getFeaturedPosts } from '@/lib/api/posts.api';
-import { Post } from '@prisma/client';
+import { PostWithBlurHash } from '@/types/post.type';
+
+import * as imageHelper from '@/lib/helpers/image.helper';
 
 type Props = {
-  featuredPosts: Post[];
+  featuredPosts: PostWithBlurHash[];
 };
 
 export async function getStaticProps() {
   const results = await getFeaturedPosts();
-  const featuredPosts = results.map((post) => {
-    return { ...post, createdAt: post.createdAt.getTime() };
+  
+  const featuredPostsPromises = results.map(async (post) => {
+    const blurHash = await imageHelper.generateBlurHash(`/images/posts/${post.image}`);
+    return {
+      ...post,
+      blurHash,
+      createdAt: post.createdAt.getTime(),
+    };
   });
+
+  const featuredPosts = await Promise.all(featuredPostsPromises);
 
   return {
     props: { featuredPosts },
