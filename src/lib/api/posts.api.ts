@@ -17,3 +17,15 @@ export async function getPosts(): Promise<Post[]> {
     },
   });
 }
+
+export async function getAllSlugs(): Promise<string[]> {
+  const posts = await getPosts();
+  const slugs = posts.map((post) => post.slug);
+  return slugs;
+}
+
+export async function findPostBySlug(slug: string): Promise<Post | null> {
+  return prisma.post.findFirst({
+    where: { slug },
+  });
+}
